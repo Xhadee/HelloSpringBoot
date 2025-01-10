@@ -14,4 +14,5 @@ public class EtudiantService {
     public List<Etudiant> getEtudiants() {
         return etudiantRepository.getAllEtudiants();
     }
+    public Etudiant getEtudiantById(Integer id) {return etudiantRepository.getEtudiantById(id);}
 }
