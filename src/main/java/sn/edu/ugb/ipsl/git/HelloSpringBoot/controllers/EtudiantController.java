@@ -1,10 +1,13 @@
 package sn.edu.ugb.ipsl.git.HelloSpringBoot.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sn.edu.ugb.ipsl.git.HelloSpringBoot.entities.Departement;
 import sn.edu.ugb.ipsl.git.HelloSpringBoot.entities.Etudiant;
+import sn.edu.ugb.ipsl.git.HelloSpringBoot.services.DepartementService;
 import sn.edu.ugb.ipsl.git.HelloSpringBoot.services.EtudiantService;
 
 import java.util.List;
@@ -17,6 +20,11 @@ public class EtudiantController {
     @Autowired
     private EtudiantService etudiantService;
 
+    @Operation(
+            summary = "Liste des etudiants",
+            description = "retourne l'ensemble des etudiants de l'IPSL"
+
+    )
     @GetMapping   /*avec une requete de type Get, voila ce qui est executé*/
     public List<Etudiant> getEtudiants() {
         return etudiantService.getEtudiants();
