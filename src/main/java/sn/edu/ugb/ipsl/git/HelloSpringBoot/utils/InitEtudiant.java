@@ -17,10 +17,9 @@ public class InitEtudiant implements CommandLineRunner {
         Etudiant e1 = new Etudiant();
         e1.setPrenom("Xhadee");
         e1.setNom("JAAY");
-        e1.setId(2);
+
 
         Etudiant e2 = Etudiant.builder()
-                .id(1)
                 .prenom("Seydou")
                 .nom("banana")
                 .build();

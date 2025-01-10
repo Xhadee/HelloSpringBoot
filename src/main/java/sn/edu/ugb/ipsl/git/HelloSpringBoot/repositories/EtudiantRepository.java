@@ -7,5 +7,6 @@ public interface EtudiantRepository {
     void saveEtudiant(Etudiant etudiant);
     Etudiant getEtudiantById(Integer id);
     List<Etudiant> getAllEtudiants();
+    void deleteEtudiant(Etudiant etudiant);
 
 }

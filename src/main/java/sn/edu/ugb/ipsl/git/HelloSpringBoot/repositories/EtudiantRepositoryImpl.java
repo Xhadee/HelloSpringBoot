@@ -17,7 +17,12 @@ public class EtudiantRepositoryImpl implements EtudiantRepository {
     @Override
     @Transactional
     public void saveEtudiant(Etudiant etudiant) {
-        em.persist(etudiant);
+        if (etudiant.getId() == null) {
+            em.persist(etudiant);
+        }
+        else {
+            em.merge(etudiant);
+        }
 
     }
 
@@ -31,5 +36,11 @@ public class EtudiantRepositoryImpl implements EtudiantRepository {
         String jpql = "SELECT e FROM Etudiant e";
         Query query = em.createQuery(jpql);
         return query.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void deleteEtudiant(Etudiant etudiant) {
+        em.remove(etudiant);
     }
 }

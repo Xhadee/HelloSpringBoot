@@ -15,4 +15,10 @@ public class EtudiantService {
         return etudiantRepository.getAllEtudiants();
     }
     public Etudiant getEtudiantById(Integer id) {return etudiantRepository.getEtudiantById(id);}
+    public void save(Etudiant etudiant) {
+        etudiantRepository.saveEtudiant(etudiant);
+    }
+    public void delete(Etudiant etudiant) {
+        etudiantRepository.deleteEtudiant(etudiant);
+    }
 }
