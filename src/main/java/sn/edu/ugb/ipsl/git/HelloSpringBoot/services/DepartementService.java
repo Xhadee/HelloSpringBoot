@@ -31,6 +31,10 @@ public class DepartementService {
     public void deleteDepartement(Departement departement) {
         departementRepository.delete(departement);
     }
+    /*recherche departement par nom*/
+    public Optional<Departement> findByNomOrderByCode(String nom) {
+        return departementRepository.findByNom(nom);
+    }
 
 
 }

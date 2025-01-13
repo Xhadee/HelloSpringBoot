@@ -1,5 +1,6 @@
 package sn.edu.ugb.ipsl.git.HelloSpringBoot.entities;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,11 +10,14 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
+@Schema(description = "permet de representer un etudiant de l'IPSL")
 public class Etudiant {
+    @Schema(description = "represente de facon unique l'identifiant de l'etudiant",example = "12")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Schema(description = "represente de facon unique l'identifiant de l'etudiant",required=true, example = "JOOP")
     @Column(nullable=false)
     private String nom ;
 

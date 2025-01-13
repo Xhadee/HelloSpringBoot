@@ -1,7 +1,12 @@
 package sn.edu.ugb.ipsl.git.HelloSpringBoot.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.websocket.server.PathParam;
+import org.springdoc.core.fn.builders.content.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,12 +45,43 @@ public class EtudiantController {
     }
 
     @PutMapping
-    public ResponseEntity saveEtudiant(@RequestBody Etudiant etudiant) {
+    @Operation(
+            summary = "enregistre un etudiant",
+            description = "permet d'enregistrer l'etudiant mais on ne met pas l'id car il est genere automatiquement par le systeme",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "450",
+                            description = "absence de l'attribut prenom dans l'objet json de la requete",
+                            content = @Content(
+                                    examples = {
+                                            @ExampleObject(
+                                                    description = "reponse en cas d'absence de la balise prenom",
+                                                    value = "Prenom obligatoire"
+                                            ),
+                                            @ExampleObject(
+                                                    description = "la balise prenom est presente mais elle est vide",
+                                                    value = "Prenom ne doit pas etre vide"
+                                            )
+                                    }
+                            )
+                    )
+
+
+            }
+    )
+    public ResponseEntity saveEtudiant(
+            @RequestBody
+            @Parameter(
+                    description = "l'etudiant à enregistrer,il ne faut pas mettre l'attribut id "
+            )
+            Etudiant etudiant
+
+    ) {
         if (etudiant.getPrenom() == null)  {
             return ResponseEntity.status(450).body("Prenom obligatoire");
         }
         if (etudiant.getPrenom().isBlank())  {
-            return ResponseEntity.status(451).body("Prenom ne doit pas etre vide");
+            return ResponseEntity.status(450).body("Prenom ne doit pas etre vide");
         }
         if (etudiant.getNom() == null) {
             return ResponseEntity.status(455).body("Nom obligatoire");

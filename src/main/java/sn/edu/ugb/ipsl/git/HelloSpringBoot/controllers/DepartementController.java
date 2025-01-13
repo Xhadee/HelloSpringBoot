@@ -28,6 +28,16 @@ public class DepartementController {
         return departementRepository.findAll();
     }
 
+    //par nom
+    @GetMapping("/nom/{nom}")
+    public ResponseEntity<?> getDepartementByNom(@PathVariable String nom) {
+        Optional<Departement> departement = departementRepository.findByNom(nom);
+        if (departement.isPresent()) {
+            return new ResponseEntity<>(departement.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 
 
     @GetMapping("/{code}")
