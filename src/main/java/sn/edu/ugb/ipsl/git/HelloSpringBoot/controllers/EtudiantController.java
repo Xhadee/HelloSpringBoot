@@ -32,6 +32,7 @@ public class EtudiantController {
     )
     @GetMapping   /*avec une requete de type Get, voila ce qui est executé*/
     public List<Etudiant> getEtudiants() {
+        System.out.println("####CONTROLLERS");
         return etudiantService.getEtudiants();
     }
 
