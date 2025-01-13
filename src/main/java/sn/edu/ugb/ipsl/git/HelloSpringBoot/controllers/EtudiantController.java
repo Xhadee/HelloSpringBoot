@@ -44,6 +44,12 @@ public class EtudiantController {
         return ResponseEntity.ok().body(etudiant);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<Etudiant>> searchEtudiants(@RequestParam String txt) {
+        List<Etudiant> etudiants= etudiantService.searchEtudiant(txt);
+        return ResponseEntity.ok().body(etudiants);
+    }
+
     @PutMapping
     @Operation(
             summary = "enregistre un etudiant",

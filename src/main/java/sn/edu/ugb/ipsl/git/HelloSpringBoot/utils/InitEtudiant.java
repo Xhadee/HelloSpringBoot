@@ -20,11 +20,25 @@ public class InitEtudiant implements CommandLineRunner {
 
 
         Etudiant e2 = Etudiant.builder()
+                .prenom("Amy")
+                .nom("JAALO")
+                .build();
+
+        Etudiant e3 = Etudiant.builder()
                 .prenom("Seydou")
-                .nom("banana")
+                .nom("JAALO")
+                .build();
+
+        Etudiant e4 = Etudiant.builder()
+                .prenom("Demba")
+                .nom("JAW")
                 .build();
         etudiantRepository.saveEtudiant(e2);
 
         etudiantRepository.saveEtudiant(e1);
+
+        etudiantRepository.saveEtudiant(e3);
+
+        etudiantRepository.saveEtudiant(e4);
     }
 }
