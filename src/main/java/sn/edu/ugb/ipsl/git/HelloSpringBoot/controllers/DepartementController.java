@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 import sn.edu.ugb.ipsl.git.HelloSpringBoot.entities.Departement;
 import sn.edu.ugb.ipsl.git.HelloSpringBoot.entities.Etudiant;
@@ -58,7 +61,9 @@ public class DepartementController {
 
 
     @PutMapping
-    public ResponseEntity<String> saveDepartement(@RequestBody Departement departement) {
+    public ResponseEntity<String> saveDepartement(
+            @RequestBody Departement departement,
+            Authentication authentication) {
         try {
             if (departement.getNom() == null || departement.getNom().isBlank()) {
                 return ResponseEntity.status(400).body("Le nom est obligatoire et ne peut pas être vide.");
@@ -71,6 +76,13 @@ public class DepartementController {
             Optional<Departement> departementExistByCode = departementService.getDepartementByCode(departement.getCode());
             if (departementExistByCode.isPresent()) {
                 return ResponseEntity.status(404).body("Département avec ce code non trouvé.");
+            }
+            if (authentication.getPrincipal() != null) {
+                System.out.println("##principal : " + authentication.getPrincipal());
+                for(GrantedAuthority auth : authentication.getAuthorities()) {
+                    System.out.println("##Role=" + auth.getAuthority());
+                }
+                departement.setCreerPar(authentication.getPrincipal().toString());
             }
             departementService.saveDepartement(departement);
             return ResponseEntity.ok().build();

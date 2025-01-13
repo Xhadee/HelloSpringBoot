@@ -19,4 +19,6 @@ public class Departement {
     @Column(nullable=false, unique=true)
     private String nom;
     private String description;
+
+    private String creerPar;
 }
