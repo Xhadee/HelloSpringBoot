@@ -38,6 +38,13 @@ public class DepartementController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    //par nom et code avec like
+    @GetMapping("/search")
+    public ResponseEntity<List<Departement>> searchDepartement(@RequestParam  String txt) {
+        List<Departement> departements = departementService.rechercheDepartement(txt);
+        return new ResponseEntity<>(departements, HttpStatus.OK);
+    }
+
 
 
     @GetMapping("/{code}")

@@ -35,6 +35,12 @@ public class DepartementService {
     public Optional<Departement> findByNomOrderByCode(String nom) {
         return departementRepository.findByNom(nom);
     }
+    /*recherche par code ou nom avec filtre*/
+    public List<Departement> rechercheDepartement(String txt) {
+        String nom = txt ;
+        String code = txt;
+        return departementRepository.findByNomContainingOrCodeContaining(nom, code);
+    }
 
 
 }

@@ -13,11 +13,20 @@ public class InitDepartement implements CommandLineRunner {
     private DepartementRepository departementRepository;
 
     public void run(String... args) throws Exception {
-        Departement departement = new Departement();
-        departement.setNom("Informatique");
-        departement.setCode("D1");
-        departementRepository.save(departement);
+        Departement d1 = new Departement();
+        d1.setNom("Genie Informatique");
+        d1.setCode("GIT");
+        departementRepository.save(d1);
 
+        Departement d2 = new Departement();
+        d2.setNom("Genie Electromecanique");
+        d2.setCode("GEM");
+        departementRepository.save(d2);
+
+        Departement d3 = new Departement();
+        d3.setNom("Genie civil");
+        d3.setCode("GEC");
+        departementRepository.save(d3);
     }
 
 }

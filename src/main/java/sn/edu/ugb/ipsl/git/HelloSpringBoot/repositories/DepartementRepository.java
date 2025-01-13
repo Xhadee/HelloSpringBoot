@@ -10,6 +10,8 @@ public interface DepartementRepository extends JpaRepository<Departement, String
 
     Optional <Departement> findByNom(String nom);
 
+    List<Departement> findByNomContainingOrCodeContaining(String nom, String code);
+
 
 
 
